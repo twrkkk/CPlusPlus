@@ -1,0 +1,4 @@
+﻿  List_with_head_elem.cpp
+C:\Users\user\Downloads\List c++ with head elem\My_List.h(59,1): warning C4267: return: преобразование из "size_t" в "TInfo"; возможна потеря данных
+C:\Users\user\Documents\c++\List_with_head_elem\List_with_head_elem\List_with_head_elem.cpp(37,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+  List_with_head_elem.vcxproj -> C:\Users\user\Documents\c++\List_with_head_elem\x64\Debug\List_with_head_elem.exe

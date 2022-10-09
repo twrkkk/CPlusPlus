@@ -1,0 +1,33 @@
+﻿  my_list_test.cpp
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(19,2): error C2226: синтаксическая ошибка: непредвиденный тип "List"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(20,2): error C2334: непредвиденные лексемы перед "{"; пропуск вероятного тела функции
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(27,1): error C2664: "Node::Node(int,Node *)": невозможно преобразовать аргумент 2 из "Node" в "Node *"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(27,35): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(11,2): message : см. объявление "Node::Node"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(28,1): error C2679: бинарный "=": не найден оператор, принимающий правый операнд типа "Node *" (или приемлемое преобразование отсутствует)
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(13,1): message : может быть "Node &Node::operator =(Node &&)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(13,1): message : или       "Node &Node::operator =(const Node &)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(28,1): message : при попытке сопоставить список аргументов "(Node, Node *)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(33,1): error C2440: инициализация: невозможно преобразовать "Node" в "Node *"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(33,11): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(34,1): error C2679: бинарный "=": не найден оператор, принимающий правый операнд типа "Node *" (или приемлемое преобразование отсутствует)
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(13,1): message : может быть "Node &Node::operator =(Node &&)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(13,1): message : или       "Node &Node::operator =(const Node &)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(34,1): message : при попытке сопоставить список аргументов "(Node, Node *)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(40,1): error C2679: бинарный "==": не найден оператор, принимающий правый операнд типа "Node" (или приемлемое преобразование отсутствует)
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(40,1): message : может быть "встроенный оператор C++ ==(Node *, Node *)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(40,1): message : при попытке сопоставить список аргументов "(Node *, Node)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(41,1): error C2679: бинарный "=": не найден оператор, принимающий правый операнд типа "Node *" (или приемлемое преобразование отсутствует)
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(13,1): message : может быть "Node &Node::operator =(Node &&)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(13,1): message : или       "Node &Node::operator =(const Node &)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(41,1): message : при попытке сопоставить список аргументов "(Node, Node *)"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(65): error C2280: "List::List(void)": предпринята попытка ссылки на удаленную функцию
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(61): message : в этом месте создано компилятором: "List::List"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(61,1): message : "List::List(void)": функция неявно удалена, так как в элемент данных "List::tail" не содержится соответствующий конструктор по умолчанию или разрешение перегрузки было неоднозначным.
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(17): message : см. объявление "List::tail"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(69,28): error C2248: List::create_by_stack: невозможно обратиться к private член, объявленному в классе "List"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(44): message : см. объявление "List::create_by_stack"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(15): message : см. объявление "List"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(70,14): error C2248: List::print: невозможно обратиться к private член, объявленному в классе "List"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(50): message : см. объявление "List::print"
+C:\Users\user\Documents\c++\my_list_test\my_list_test\my_list_test.cpp(15): message : см. объявление "List"
