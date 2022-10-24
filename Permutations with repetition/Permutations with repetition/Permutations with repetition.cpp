@@ -1,20 +1,21 @@
 ﻿#include <iostream>
 
-int Length = 0;
+int K = 0;
 char Letters[] = "абвгдежзиклмно";
+int Count[sizeof Letters] = { 0 };
 
-void add_letter(char* s, int n, int* Count)
+
+void add_letter(char* s, int n)
 {
     for (int i = 0; i < sizeof(Letters) - 1; i++) {
-        if (Count[i] == 0) continue;
-        else {
+        if (Count[i] <= K - 3)
+        {
             s[n] = Letters[i];
-            if (n == Length - 1) std::cout << s << '\n';
-            else 
-            {
-                --Count[i];
-                add_letter(s, n + 1, Count);
+            if (n == K - 1) std::cout << s << std::endl;
+            else {
                 ++Count[i];
+                add_letter(s, n + 1);
+                --Count[i];
             }
         }
     }
@@ -24,12 +25,8 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
     std::cout << "Введите длину слова " << '\n';
-    std::cin >> Length;
+    std::cin >> K;
 
-    int* Count = new int[Length + 1];
-    for (int i = 0; i < Length; i++)
-        Count[i] = Length - 2;
-
-    char *s = new char[Length +1]; s[Length] = 0;
-    add_letter(s, 0, Count);
+    char* s = new char[K + 1]; s[K] = '\0';
+    add_letter(s, 0);
 }
