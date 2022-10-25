@@ -22,7 +22,7 @@ void main()
 	std::cin.get();
 }
 
-//рекурси€ 
+//recursion 
 
 int sum(const ptrNODE head)
 {
@@ -41,7 +41,7 @@ int count(const ptrNODE head)
 	}
 	return result;
 }
-//скопировать список в другой 
+//copy list
 void copy_list(LIST& kuda, ptrNODE otkuda)
 {
 	if (otkuda)
@@ -51,7 +51,7 @@ void copy_list(LIST& kuda, ptrNODE otkuda)
 	}
 	kuda.get_tail()->next = nullptr;
 }
-//удвоить четные элементы
+//double even elem
 void doublee(LIST& list, ptrNODE elem)
 {
 	if (elem && elem->info % 2 == 0)
@@ -65,8 +65,8 @@ void doublee(LIST& list, ptrNODE elem)
 	}
 }
 
-//найти элемент
-//последний четный
+//find elem
+//last even
 ptrNODE before_last_even(LIST& list)
 {
 	ptrNODE result = nullptr;
@@ -82,7 +82,7 @@ ptrNODE before_last_even(LIST& list)
 	}
 	return result;
 }
-//минимальный
+//min
 ptrNODE before_min_elem(LIST& list)
 {
 	ptrNODE p = list.get_head()->next;
@@ -99,7 +99,7 @@ ptrNODE before_min_elem(LIST& list)
 	}
 	return min_pos;
 }
-//максимальный 
+//max 
 ptrNODE before_max_elem(LIST& list)
 {
 	ptrNODE p = list.get_head();
@@ -120,7 +120,7 @@ ptrNODE before_max_elem(LIST& list)
 
 
 
-//ѕеред последним встреченным двузначным числом вставить его квадрат
+//before last XX-number enter XX^2
 bool task_5(LIST& list)
 {
 	bool result = false;
@@ -142,7 +142,7 @@ bool task_5(LIST& list)
 	return result;
 }
 
-// ”далить первый и последний встреченные эл-ты, кратные 7
+//delete first and last elem even 7
 ptrNODE find_elem(LIST& list, bool is_first)
 {
 	auto is_even = [](int elem) {return elem != 0 && elem % 7 == 0; };
@@ -196,7 +196,7 @@ bool task_6(LIST& list)
 	return result;
 }
 
-//удалить элемент после последнего четного
+//delete elem after last even
 bool task_2(LIST& list, int count)
 {
 	bool result = true;
@@ -230,7 +230,7 @@ ptrNODE before_max_elem(LIST& list)
 	return result;
 }
 
-//Ќайти максимальный элемент и переставить его в голову
+//find max elem and move it at head
 bool task_7(LIST& list)
 {
 	auto switch_pointers = [](ptrNODE q, ptrNODE p)
@@ -251,7 +251,7 @@ bool task_7(LIST& list)
 	return flag;
 }
 
-//переставить минимальный элемент в начало списка
+//move min elem at the head
 bool task_3(LIST& list)
 {
 	auto switch_pointers =
