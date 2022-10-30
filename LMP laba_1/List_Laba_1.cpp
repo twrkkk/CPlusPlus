@@ -3,17 +3,6 @@
 using std::cin;
 using std::cout;
 
-//size_t get_first_digit(int number)
-//{
-//	size_t result = 0;
-//	while (number)
-//	{
-//		result = number % 10;
-//		number /= 10;
-//	}
-//	return result;
-//}
-
 bool task(LIST& list)
 {
 	auto get_first_digit = [](int number)
@@ -27,116 +16,149 @@ bool task(LIST& list)
 		return result;
 	};
 
-	//bool result = false;
-	//ptrNODE beg = list.get_head()->next, p = beg;// , end = nullptr;
-	//size_t digit_1 = get_first_digit(beg->info), digit_2 = -1;
-	//while (digit_1 != digit_2 && !result)
-	//{
-	//	while (p->next && !result)
-	//	{
-	//		p = p->next;
-	//		digit_2 = get_first_digit(p->info);
-	//		if (digit_1 == digit_2)
-	//		{
-	//			//end = p;
-	//			result = true;
-	//		}
-	//	}
-	//	if (!result)
-	//	{
-	//		beg = beg->next;
-	//		p = beg->next;
-	//		//end = p;
-	//		digit_1 = get_first_digit(beg->info);
-	//		digit_2 = get_first_digit(p->info);
-	//	}
-	//	
-	//}
-
 	bool result = false;
-	ptrNODE beg = list.get_head(), p = beg->next;// , end = nullptr;
+	ptrNODE beg = list.get_head(), p = beg;// , end = nullptr;
 	size_t digit_1 = get_first_digit(beg->next->info), digit_2 = -1;
-	while (digit_1 != digit_2 && !result)
+	while ( beg && beg->next && !result)
 	{
+		p = beg->next;
 		while (p->next && !result)
 		{
 			digit_2 = get_first_digit(p->next->info);
 			if (digit_1 == digit_2)
 			{
-				//end = p;
 				result = true;
 			}
 			else
 				p = p->next;
 
 		}
+
 		if (!result)
 		{
 			beg = beg->next;
-			p = beg->next;
-			//end = p;
-			digit_1 = get_first_digit(beg->next->info);
-			digit_2 = get_first_digit(p->next->info);
+			if((beg->next != nullptr))
+				digit_1 = get_first_digit(beg->next->info);
+			else
+			{
+				beg = nullptr;
+				p = nullptr;
+			}
 		}
 
 	}
 
-	cout << beg->info << ' ' << p->info<<'\n';
+	//cout << beg->info << ' ' << p->info << '\n';
 
 	auto switch_pointers =
 		[&](ptrNODE q, ptrNODE p)
 	{
-		/*ptrNODE tmp = p->next;
+		ptrNODE tmp = p->next;
 		p->next = tmp->next;
 		tmp->next = q->next;
 		q->next = tmp;
-		p = q;*/
-		/*ptrNODE tail = list.get_tail();
-		if (p != tail)
-		{
-			ptrNODE tmp = beg->next;
-			beg->next = p->next;
-			p->next = tail->next;
-			tail->next = tmp;
+		if (!p->next)
 			list.set_tail(p);
-		}*/
-		/*ptrNODE tmp = q->next;
-		q->next = p->next;
-		p->next = tmp;*/
-		/*ptrNODE tmp1 = q->next;
-		ptrNODE tmp2 = p->next;
-		q->next = p->next;
-		p->next = tmp;*/
-		ptrNODE tmp = p->next;
-		p->next = q->next;
-		q->next->next = tmp;
 	};
 
-	switch_pointers(beg, p);
+	if (beg && p)
+	{
+		result = true;
+		switch_pointers(beg, p);
+
+		if (beg->next->next != p)
+			switch_pointers(p, beg->next); // не надо делать если они соседи
+	}
 	
+
+
 	return result;
+}
+
+void list_to_stream(std::ostream& stream, LIST& list, bool result)
+{
+	ptrNODE p = list.get_head();
+	while (p->next)
+	{
+		stream << p->next->info << ' ';
+		p = p->next;
+	}
+
+	if (!result)
+		stream << "\nno elem\n";
+}
+
+void clear_list(LIST& list)
+{
+	while(!list.empty())
+		list.del_from_head();
 }
 
 void main()
 {
 	LIST list;
+	std::ofstream output("output.txt");
 	std::ifstream file("data.txt");
 	if (file)
 	{
-		list.create_by_queue(file);
-		list.print();
-		cout << '\n';
-		/*std::cout << list.get_size() << "\n";
-		list.del_after(list.get_head()->next->next);*/
-		//list.sorting();
-		//list.print();
 
-		task(list);
-		list.print();
+		int choice = -1;
 
+		do
+		{
 
+			if (!list.empty())
+				clear_list(list);
+
+			cout << "Choose how to create the list:\n" <<
+				"1. Create by stack\n" <<
+				"2. Create by queue\n" <<
+				"3. Create by order\n" <<
+				"4. Exit\n";
+
+			bool error = false;
+			do
+			{
+				cin >> choice;
+				if (choice < 1 || choice > 4)
+					error = true;
+			} while (error);
+
+			file.clear();
+			file.seekg(0);
+
+			switch (choice)
+			{
+			case 1:
+				list.create_by_stack(file);
+				break;
+			case 2:
+				list.create_by_queue(file);
+				break;
+			case 3:
+				list.create_by_order(file);
+				break;
+			case 4:
+				exit(0);
+				break;
+			}
+			list.print();
+			cout << '\n';
+
+			bool result = task(list);
+			list_to_stream(output, list, result);
+
+			char a;
+			cout << "Exit? (Y - YES, ANY KEY - NO)\n";
+			cin >> a;
+			if (a == 'y' || a == 'Y')
+				choice = 4;
+
+		} while (choice != 4);
 		file.close();
+		output.close();
 	}
+	else
+		cout << "no file\n";
 	std::cin.get();
 }
-

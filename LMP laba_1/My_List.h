@@ -46,17 +46,6 @@ public:
 		size = 0;
 	}
 	~LIST();
-
-	ptrNODE get_tail()
-	{
-		return tail;
-	}
-
-	void set_tail(ptrNODE tail)
-	{
-		this->tail = tail;
-	}
-
 	ptrNODE get_head()
 	{
 		return head;
@@ -80,4 +69,5 @@ public:
 	void create_by_order(std::ifstream& file);
 	void print();
 	void sorting();
+	void set_tail(ptrNODE tail);
 };

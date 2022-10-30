@@ -1,9 +1,9 @@
 #include "My_List.h"
 #include <functional>
-//#define _CRTDBG_MAP_ALLOC_
+#define _CRTDBG_MAP_ALLOC_
 #include <crtdbg.h>
-//#define DBG_NEW new(_NORMAL_BLOCK, __FILE, __LINE__)
-//#define newDBG_NEW
+#define DBG_NEW new(_NORMAL_BLOCK, __FILE, __LINE__)
+#define newDBG_NEW
 
 LIST::~LIST()
 {
@@ -31,6 +31,7 @@ void LIST::add_to_tail(TInfo elem)
 {
 	add_by_pointer(tail->next, elem);
 	tail = tail->next;
+	tail->next = nullptr;
 }
 
 void LIST::add_after(ptrNODE ptr, TInfo elem)
@@ -139,4 +140,9 @@ void LIST::sorting()
 		}
 	}
 	tail = h_prev;
+}
+
+void LIST::set_tail(ptrNODE _tail)
+{
+	tail = _tail;
 }
