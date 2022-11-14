@@ -73,6 +73,35 @@ DLIST::~DLIST()
 		Delete(begin);
 }
 
+ptrNODE& DLIST::del_after(ptrNODE& ptr)
+{
+	ptrNODE tmp = ptr->next;
+	ptr->next = tmp->next;
+	if (!tmp->next)
+		end = ptr;
+	else
+		tmp->next->prev = ptr;
+	
+	static ptrNODE a;
+	a = tmp->next;
+
+	delete tmp;
+	size--;
+	return a;
+}
+
+void DLIST::del_before(ptrNODE& ptr)
+{
+	ptrNODE tmp = ptr->prev;
+	ptr->prev = tmp->prev;
+	if (!tmp->prev)
+		begin = ptr;
+	else
+		tmp->prev->next = ptr;
+	delete tmp;
+	size--;
+}
+
 Ticket& DLIST::Delete(ptrNODE& ptr)
 {
 	ptrNODE p = ptr;
