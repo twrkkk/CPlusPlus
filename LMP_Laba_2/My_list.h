@@ -34,7 +34,7 @@ public:
 	void print();
 	~DLIST();
 	Ticket& Delete(ptrNODE& ptr);//выкидываем узел
-	void del_before(ptrNODE& ptr);
+	ptrNODE& del_before(ptrNODE& ptr);
 	ptrNODE& del_after(ptrNODE& ptr);
 	ptrNODE get_begin() const
 	{

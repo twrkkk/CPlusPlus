@@ -90,7 +90,7 @@ ptrNODE& DLIST::del_after(ptrNODE& ptr)
 	return a;
 }
 
-void DLIST::del_before(ptrNODE& ptr)
+ptrNODE& DLIST::del_before(ptrNODE& ptr)
 {
 	ptrNODE tmp = ptr->prev;
 	ptr->prev = tmp->prev;
@@ -98,8 +98,13 @@ void DLIST::del_before(ptrNODE& ptr)
 		begin = ptr;
 	else
 		tmp->prev->next = ptr;
+
+	static ptrNODE a;
+	a = tmp->next;
+
 	delete tmp;
 	size--;
+	return a;
 }
 
 Ticket& DLIST::Delete(ptrNODE& ptr)

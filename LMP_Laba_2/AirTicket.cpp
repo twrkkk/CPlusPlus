@@ -6,7 +6,10 @@ Ticket::Ticket(std::ifstream& file)
 	std::getline(file, plane_model);
 	std::getline(file, FIO);
 	file >> number;
+	int day = 0, month = 0, year = 0;
 	file >> day >> month >> year;
+	set_date(day, month, year);
+	//Date date(day, month, year);
 	file.ignore();
 	std::string delim_line;
 	std::getline(file, delim_line);
@@ -14,21 +17,12 @@ Ticket::Ticket(std::ifstream& file)
 
 int Ticket::compare(const Ticket& ticket)
 {
-	auto compare_date = [](const Ticket& tik1, const Ticket& tik2)
-	{
-		int result = 1;
-		(tik1.get_year() > tik2.get_year()) ? result = 1 : (tik1.get_month() < tik2.get_month()) ? result = -1 :
-			(tik1.get_month() > tik2.get_month()) ? result = 1 : (tik1.get_month() < tik2.get_month()) ? result = -1 :
-			(tik1.get_day() > tik2.get_day()) ? result = 1 : (tik1.get_day() < tik2.get_day()) ? result = -1 : result = 0;
-		return result;
-	};
-
 	int result = 1;
 	if (target < ticket.get_target() ||
-		target == ticket.get_target() && (compare_date(*this, ticket) < 0) ||
-		target == ticket.get_target() && (compare_date(*this, ticket) == 0) && number < ticket.get_number())
+		target == ticket.get_target() && (date.compare(ticket.date)) < 0 ||
+		target == ticket.get_target() && (date.compare(ticket.date)) == 0 && number < ticket.get_number())
 		result = -1;
-	else if (target == ticket.get_target() && (compare_date(*this, ticket) == 0) && number == ticket.get_number())
+	else if (target == ticket.get_target() && date.compare(ticket.date) == 0 && number == ticket.get_number())
 		result = 0;
 
 	return result;
@@ -54,21 +48,18 @@ int Ticket::get_number() const
 	return number;
 }
 
-int Ticket::get_day() const
+Date Ticket::get_date() const
 {
-	return day;
+	return date;
 }
 
-int Ticket::get_month() const
+void Ticket::set_date(int d, int m, int y)
 {
-	return month;
-}
+	date.set_day(d);
+	date.set_month(m);
+	date.set_year(y);
 
-int Ticket::get_year() const
-{
-	return year;
 }
-
 
 void Ticket::print()
 {
@@ -76,6 +67,36 @@ void Ticket::print()
 	std::cout << number << '\n';
 	std::cout << plane_model << '\n';
 	std::cout << FIO << '\n';
-	std::cout << day << ' ' << month << ' ' << year << '\n';
+	date.print();
 	std::cout << '\n';
+}
+
+int Date::get_day() const
+{
+	return day;
+}
+
+int Date::get_month() const
+{
+	return month;
+}
+
+int Date::get_year() const
+{
+	return year;
+}
+
+void Date::set_day(int d) 
+{
+	day = d;
+}
+
+void Date::set_month(int m)
+{
+	month = m;
+}
+
+void Date::set_year(int y)
+{
+	year = y;
 }

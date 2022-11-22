@@ -1,99 +1,29 @@
-﻿//#include <iostream>
-//#include <fstream>
-//#include <Windows.h>
-//#include "My_list.h"
-//
-//bool task(DLIST& list)
-//{
-//	bool result = false;
-//
-//	std::cout << "----------------------------\n";
-//	std::string place;
-//	std::cout << "Enter target\n";
-//	std::cin >> place;
-//
-//	int day, month, year;
-//	std::cout << "Enter date\n";
-//	std::cin >> day >> month >> year;
-//	std::cout << "----------------------------\n";
-//
-//	ptrNODE p = list.get_begin();
-//	while (p)
-//	{
-//		if (p->info.get_target() == place || 
-//			(p->info.get_day() == day && p->info.get_month() == month && p->info.get_year() == year))
-//		{
-//			list.Delete(p);
-//			result = true;
-//		}
-//		else
-//			p = p->next;
-//	}
-//
-//
-//	return result;
-//}
-//
-//int main()
-//{
-//	SetConsoleCP(1251);
-//	SetConsoleOutputCP(1251);
-//
-//	std::ifstream file("tickets.txt");
-//	if (file)
-//	{
-//		DLIST DL(file);
-//		DL.print();
-//		
-//		if (task(DL))
-//			DL.print();
-//		else
-//			std::cout << "no target\n";
-//	}
-//	std::cin.get();
-//	return 0;
-//}
-
-
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <Windows.h>
 #include "My_list.h"
 
-bool task(DLIST& list)
+bool task(DLIST& list, std::string place, Date& date)
 {
-	std::cout << "----------------------------\n";
-	std::string place;
-	std::cout << "Enter target\n";
-	std::cin >> place;
-
-	int day, month, year;
-	std::cout << "Enter date\n";
-	std::cin >> day >> month >> year;
-	std::cout << "----------------------------\n";
-
+	bool stop = false, result = false;
 	ptrNODE p = list.get_begin();
-	bool flag = false;
-
-	while (p->info.get_target() != place)
-		p = p->next;
-
-	while (p && !flag)
+	while (p && !stop)
 	{
-		if ((p->info.get_day() == day && p->info.get_month() == month && p->info.get_year() == year))
-		{
-			p = list.del_after(p->prev);
-		}
+		if (p->info.get_target() > place || p->info.get_target() == place && p->info.get_date().compare(date) > 0) stop = true;
 		else
-		{ 
-			p = p->next;
-			if (p->info.get_target() != place)
-				flag = true;
+		{
+			if (p->info.get_target() == place && p->info.get_date().compare(date) == 0)
+			{
+				result = true;
+				p = list.del_after(p->prev);
+			}
 		}
-		
+		if (!result)
+			p = p->next;
 	}
 
-	return flag;
+
+	return result;
 }
 
 int main()
@@ -106,18 +36,22 @@ int main()
 	{
 		DLIST DL(file);
 		DL.print();
-		/*std::cout << "--------------------\n";
-		DL.del_after(DL.get_begin()->next->next);
-		DL.print();*/
-		if (task(DL))
+
+		std::cout << "----------------------------\n";
+		std::string place;
+		std::cout << "Enter target\n";
+		std::cin >> place;
+
+		std::cout << "Enter date\n";
+		int day, month, year;
+		std::cin >> day >> month >> year;
+		Date date(day, month, year);
+		std::cout << "----------------------------\n";
+
+		if (task(DL, place, date))
 			DL.print();
 		else
-			std::cout << "no target\n";
-
-		//DL.del_after(DL.get_begin()->next->next);
-		/*DL.del_after(DL.get_begin()->next->next->next->next);
-		std::cout << "--------------------\n";
-		DL.print();*/
+			std::cout << "error\n";
 	}
 	std::cin.get();
 	return 0;
